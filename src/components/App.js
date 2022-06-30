@@ -141,7 +141,9 @@ function App() {
               />
             </div>
             <div>title :{movie.original_title}</div>
-            <div>rating:{movie.vote_average}</div>
+            <div>
+              rating:{movie.vote_average}/10 <i>({movie.vote_count} votes)</i>
+            </div>
             <div>popularity:{movie.popularity}</div>
           </div>
         ))
@@ -178,7 +180,9 @@ function App() {
               {toggledTv ? <DetailsTv idTv={idTv} /> : null}
             </div>
             <div>title :{tv.original_title}</div>
-            <div>rating:{tv.vote_average}</div>
+            <div>
+              rating:{tv.vote_average}/10 <i>({tv.vote_count} votes)</i>
+            </div>
             <div>popularity:{tv.popularity}</div>
           </div>
         ))
