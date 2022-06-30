@@ -49,13 +49,16 @@ export default function Search() {
         </div>
       ) : (
         <div style={{ display: "flex" }}>
-          <p>search: </p>
           <input
             onChange={(e) => {
               setfinder(e.target.value);
             }}
           />
-          <button type="submit" onClick={fetching}>
+          <button
+            style={{ backgroundColor: "#db0000", color: "white" }}
+            type="submit"
+            onClick={fetching}
+          >
             OK
           </button>
         </div>
