@@ -4,6 +4,8 @@ import axios from "axios";
 import DetailsM from "./DetailsM";
 import DetailsTv from "./DetailsTv";
 import Search from "./Search";
+import List from "./List";
+import AddItem from "./AddItem";
 
 const pathToImg = "https://image.tmdb.org/t/p/w500";
 const API = process.env.REACT_APP_API;
@@ -13,10 +15,13 @@ function App() {
   const [listedTv, setListedTv] = useState();
   const [toggledM, setToggleM] = useState(false);
   const [toggledTv, setToggleTv] = useState(false);
+  const [tokenRequest, setTokenRequest] = useState(null);
+  const [session, setSession] = useState();
   const [idM, setIdM] = useState();
   const [idTv, setIdTv] = useState();
   //on useEffect et on fait une const en async pour aller chercher les movie popular et les series puis on rentre les data directement dans props
   //car avec axios on a pas besoin de parse notre réponse
+  //create une tokenrequest  afin de pouvoir creer une liste
   useEffect(() => {
     const fetching = async () => {
       const query = await axios.get(
@@ -37,8 +42,52 @@ function App() {
       setListedTv(query.data.results);
     };
 
+    function tokenrequest() {
+      // axios
+      //   .get(
+      //     "https://api.themoviedb.org/3/authentication/token/new?api_key=" + API
+      //   )
+      //   .then((res) => {
+      //     axios({
+      //       method: "post",
+      //       url:
+      //         "https://api.themoviedb.org/3/authentication/session/new?api_key=" +
+      //         API,
+      //       data: {
+      //         request_token: res.data.request_token,
+      //       },
+      //     })
+      //       .catch((err) => console.log(err))
+      //       .then((res) => console.log(res));
+      //   });
+      // .then((res) => {
+      //   setTokenRequest(res.data.request_token);
+      // })
+      // .then(() => {
+      //   console.log(tokenRequest);
+      // });
+    }
+
+    // const createSession = async () => {
+    //   await axios({
+    //     method: "post",
+    //     url:
+    //       "https://api.themoviedb.org/3/authentication/session/new?api_key=" +
+    //       API,
+    //     data: {
+    //       request_token: tokenRequest,
+    //     },
+    //   })
+    //     .catch((err) => console.log(err))
+    //     .then((res) => console.log(res));
+    // };
+    // tokenrequest();
+
     fetching();
     fetching2();
+    // if (tokenRequest != null) {
+    //   createSession();
+    // }
   }, []);
 
   return (
@@ -48,6 +97,9 @@ function App() {
       </div>
       <>
         <Search />
+      </>
+      <>
+        <List tokenrequest={tokenRequest} />
       </>
       <div className="titleSection">
         <h2>Popular Films</h2>
@@ -80,6 +132,12 @@ function App() {
                 src={pathToImg + movie.poster_path}
               />
               {toggledM ? <DetailsM idM={idM} /> : null}
+              <AddItem
+                name={movie.original_title}
+                resume={movie.overview}
+                idM={idM}
+                tokenrequest={tokenRequest}
+              />
             </div>
             <div>title :{movie.original_title}</div>
             <div>rating:{movie.vote_average}</div>

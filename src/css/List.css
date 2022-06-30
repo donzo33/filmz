@@ -1,0 +1,18 @@
+.list {
+    background-color: red;
+
+    position: fixed;
+    top: 10%;
+
+    right: 1%;
+}
+
+
+.burger {
+    background-color: green;
+   
+    position: fixed;
+    top: 10%;
+
+    right: 1%;
+}
