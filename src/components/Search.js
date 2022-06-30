@@ -4,7 +4,6 @@ import axios from "axios";
 
 const API = process.env.REACT_APP_API;
 export default function Search() {
-  //on fetch en async les donnée avec le props id
   const [finder, setfinder] = useState();
   const [found, setfound] = useState(false);
   const [idSearch, setidSearch] = useState();

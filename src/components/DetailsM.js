@@ -5,7 +5,6 @@ import axios from "axios";
 const API = process.env.REACT_APP_API;
 
 export default function DetailsM(props) {
-  //on fetch en async les donnée avec le props id
   const [detailM, setDetailM] = useState();
   useEffect(() => {
     const fetching = async () => {

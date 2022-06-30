@@ -15,8 +15,6 @@ function App() {
   const [toggledTv, setToggleTv] = useState(false);
   const [idM, setIdM] = useState();
   const [idTv, setIdTv] = useState();
-  //on useEffect et on fait une const en async pour aller chercher les movie popular et les series puis on rentre les data directement dans props
-  //car avec axios on a pas besoin de parse notre réponse
   useEffect(() => {
     const fetching = async () => {
       const query = await axios.get(

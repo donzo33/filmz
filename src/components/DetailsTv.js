@@ -4,7 +4,6 @@ import axios from "axios";
 
 const API = process.env.REACT_APP_API;
 export default function DetailsTv(props) {
-  //on fetch en async les donnée avec le props id
   const [detailTv, setDetailTv] = useState();
 
   useEffect(() => {
@@ -37,12 +36,7 @@ export default function DetailsTv(props) {
           <div>
             <i>{detailTv.overview}</i>
           </div>
-          {/* <div>
-            <b>author:</b>
-            {detailTv.production_companies[0] === undefined
-              ? detailTv.production_companies[0].name
-              : null}
-          </div> */}
+
           <div>
             <b>genres: </b>
             {detailTv.genres.map((element) => element.name + " ")}
