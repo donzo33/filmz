@@ -104,6 +104,16 @@ function App() {
                 setToggleTv(false);
                 setIdTv(null);
               }}
+              // add a onclick + fallback for mobile
+              onClick={() => {
+                if (toggledTv === true) {
+                  setToggleTv(false);
+                  setIdTv(null);
+                } else {
+                  setToggleTv(true);
+                  setIdTv(tv.id);
+                }
+              }}
             >
               <img style={{ width: "100%" }} src={pathToImg + tv.poster_path} />
               {toggledTv ? <DetailsTv idTv={idTv} /> : null}

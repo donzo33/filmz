@@ -20,7 +20,6 @@ export default function DetailsTv(props) {
     };
     fetching();
   }, []);
-  console.log(detailTv);
 
   return (
     <div className="details">
