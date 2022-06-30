@@ -1,0 +1,123 @@
+import "../css/App.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import DetailsM from "./DetailsM";
+import DetailsTv from "./DetailsTv";
+import Search from "./Search";
+
+const pathToImg = "https://image.tmdb.org/t/p/w500";
+const API = process.env.REACT_APP_API;
+
+function App() {
+  const [listedM, setListedM] = useState();
+  const [listedTv, setListedTv] = useState();
+  const [toggledM, setToggleM] = useState(false);
+  const [toggledTv, setToggleTv] = useState(false);
+  const [idM, setIdM] = useState();
+  const [idTv, setIdTv] = useState();
+  //on useEffect et on fait une const en async pour aller chercher les movie popular et les series puis on rentre les data directement dans props
+  //car avec axios on a pas besoin de parse notre réponse
+  useEffect(() => {
+    const fetching = async () => {
+      const query = await axios.get(
+        "https://api.themoviedb.org/3/movie/popular?api_key=" +
+          API +
+          "&language=en-US&page=1"
+      );
+      setListedM(query.data.results);
+    };
+
+    const fetching2 = async () => {
+      const query = await axios.get(
+        " https://api.themoviedb.org/3/tv/popular?api_key=" +
+          API +
+          "&language=en-US&page=1"
+      );
+
+      setListedTv(query.data.results);
+    };
+
+    fetching();
+    fetching2();
+  }, []);
+
+  return (
+    <div className="App">
+      <div style={{ textAlign: "center", width: "100%" }}>
+        <h1>Welcome To filmz</h1>
+      </div>
+      <>
+        <Search />
+      </>
+      <div className="titleSection">
+        <h2>Popular Films</h2>
+      </div>
+      {listedM ? (
+        listedM.map((movie) => (
+          <div id="listedContainer" key={movie.id} className={movie.id}>
+            <div
+              onMouseEnter={() => {
+                setToggleM(true);
+                setIdM(movie.id);
+              }}
+              onMouseLeave={() => {
+                setToggleM(false);
+                setIdM(null);
+              }}
+              // add a onclick + fallback for mobile
+              onClick={() => {
+                if (toggledM === true) {
+                  setToggleM(false);
+                  setIdM(null);
+                } else {
+                  setToggleM(true);
+                  setIdM(movie.id);
+                }
+              }}
+            >
+              <img
+                style={{ width: "100%" }}
+                src={pathToImg + movie.poster_path}
+              />
+              {toggledM ? <DetailsM idM={idM} /> : null}
+            </div>
+            <div>title :{movie.original_title}</div>
+            <div>rating:{movie.vote_average}</div>
+            <div>popularity:{movie.popularity}</div>
+          </div>
+        ))
+      ) : (
+        <h1>loading</h1>
+      )}
+      <div className="titleSection">
+        <h2>Popular series</h2>
+      </div>
+      {listedTv ? (
+        listedTv.map((tv) => (
+          <div id="listedContainer" key={tv.id} className={tv.id}>
+            <div
+              onMouseEnter={() => {
+                setToggleTv(true);
+                setIdTv(tv.id);
+              }}
+              onMouseLeave={() => {
+                setToggleTv(false);
+                setIdTv(null);
+              }}
+            >
+              <img style={{ width: "100%" }} src={pathToImg + tv.poster_path} />
+              {toggledTv ? <DetailsTv idTv={idTv} /> : null}
+            </div>
+            <div>title :{tv.original_title}</div>
+            <div>rating:{tv.vote_average}</div>
+            <div>popularity:{tv.popularity}</div>
+          </div>
+        ))
+      ) : (
+        <h1>loading</h1>
+      )}
+    </div>
+  );
+}
+
+export default App;
