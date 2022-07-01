@@ -43,52 +43,8 @@ function App() {
       setListedTv(query.data.results);
     };
 
-    function tokenrequest() {
-      // axios
-      //   .get(
-      //     "https://api.themoviedb.org/3/authentication/token/new?api_key=" + API
-      //   )
-      //   .then((res) => {
-      //     axios({
-      //       method: "post",
-      //       url:
-      //         "https://api.themoviedb.org/3/authentication/session/new?api_key=" +
-      //         API,
-      //       data: {
-      //         request_token: res.data.request_token,
-      //       },
-      //     })
-      //       .catch((err) => console.log(err))
-      //       .then((res) => console.log(res));
-      //   });
-      // .then((res) => {
-      //   setTokenRequest(res.data.request_token);
-      // })
-      // .then(() => {
-      //   console.log(tokenRequest);
-      // });
-    }
-
-    // const createSession = async () => {
-    //   await axios({
-    //     method: "post",
-    //     url:
-    //       "https://api.themoviedb.org/3/authentication/session/new?api_key=" +
-    //       API,
-    //     data: {
-    //       request_token: tokenRequest,
-    //     },
-    //   })
-    //     .catch((err) => console.log(err))
-    //     .then((res) => console.log(res));
-    // };
-    // tokenrequest();
-
     fetching();
     fetching2();
-    // if (tokenRequest != null) {
-    //   createSession();
-    // }
   }, []);
 
   return (
