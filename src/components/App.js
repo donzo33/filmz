@@ -55,9 +55,10 @@ function App() {
       <>
         <Search />
       </>
-      <>
+      {/* Request token OK , to do : store token in locastorage and ask access token for create the list
+       <>
         <List tokenrequest={tokenRequest} />
-      </>
+      </> */}
       <div className="titleSection">
         <h2>Popular Films</h2>
       </div>
