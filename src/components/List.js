@@ -1,11 +1,12 @@
 import "../css/List.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import CreateList from "./CreateList";
 
 const API = process.env.REACT_APP_API;
 
 export default function List(props) {
-  //on fetch en async les donnée avec le props id
+  //on get la list de l'user et on render dans le component
   const [toggleList, setToggleList] = useState(false);
 
   return (
@@ -17,16 +18,18 @@ export default function List(props) {
             setToggleList(false);
           }}
         >
-          My list {props.session}
+          My list
         </div>
       ) : (
-        <div
-          onClick={() => {
-            setToggleList(true);
-          }}
-          className="burger"
-        >
-          Open my list
+        <div className="burger">
+          <CreateList />
+          <div
+            onClick={() => {
+              setToggleList(true);
+            }}
+          >
+            Open my list
+          </div>
         </div>
       )}
     </div>

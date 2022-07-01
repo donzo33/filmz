@@ -133,12 +133,12 @@ function App() {
                 src={pathToImg + movie.poster_path}
               />
               {toggledM ? <DetailsM idM={idM} /> : null}
-              <AddItem
+              {/* <AddItem
                 name={movie.original_title}
                 resume={movie.overview}
                 idM={idM}
                 tokenrequest={tokenRequest}
-              />
+              /> */}
             </div>
             <div>title :{movie.original_title}</div>
             <div>
@@ -178,6 +178,12 @@ function App() {
             >
               <img style={{ width: "100%" }} src={pathToImg + tv.poster_path} />
               {toggledTv ? <DetailsTv idTv={idTv} /> : null}
+              {/* <AddItem
+                name={tv.original_title}
+                resume={tv.overview}
+                idTv={idTv}
+                tokenrequest={tokenRequest}
+              /> */}
             </div>
             <div>title :{tv.original_title}</div>
             <div>

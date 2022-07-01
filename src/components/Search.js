@@ -5,7 +5,7 @@ import axios from "axios";
 const API = process.env.REACT_APP_API;
 export default function Search() {
   //on fetch en async les donnée avec le props id
-  const [finder, setfinder] = useState();
+  const [finder, setfinder] = useState(null);
   const [found, setfound] = useState(false);
   const [idSearch, setidSearch] = useState();
   const [name, setName] = useState("https://www.google.com/search?q=");
@@ -21,6 +21,7 @@ export default function Search() {
       )
       .catch((err) => console.log(err))
       .then((res) => setfound(res.data.results));
+    setfinder(null);
   }
 
   return (
@@ -57,7 +58,7 @@ export default function Search() {
           <button
             style={{ backgroundColor: "#db0000", color: "white" }}
             type="submit"
-            onClick={fetching}
+            onClick={finder ? fetching : null}
           >
             OK
           </button>
